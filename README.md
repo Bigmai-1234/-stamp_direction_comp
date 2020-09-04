@@ -15,7 +15,7 @@
 思路：
 图章基本上是红色的，我们先根据颜色提取可能的图章区域。
 当然，假如文档中，还有其他红色的区域，这一步都会提取出来。
-
+'''
 img = cv2.imdecode(np.fromfile("jingshanshi_muti_stamp.png", dtype=np.uint8), -1)
 
 
@@ -41,10 +41,11 @@ mask = extract_red(img)
 mask_img = cv2.add(img, np.zeros(np.shape(img), dtype=np.uint8), mask=mask)
 #cv2.imwrite('jingshanshi_muti_stamp_pickred.png', mask_img)
 
-
+'''
 
 公章一般都是圆形的，我们先利用HoughCircles 找出圆来
 
+'''
 # cv2.HoughCircles 寻找出圆，匹配出图章的位置
 
 circles = cv2.HoughCircles(binaryImg, cv2.HOUGH_GRADIENT, 1, 40,
@@ -115,6 +116,7 @@ def circle_map(contours, circles):
 
 
 circle_point, is_stramp = circle_map(contours, circles)
+'''
 
 上面的代码中，用到了采样的方法，如何判断轮廓是圆弧呢？每个像素点穷举显然不合适，于是我们多次采样，然后投票判决。
 
