@@ -1,0 +1,1 @@
+# -stamp_direction_comp
